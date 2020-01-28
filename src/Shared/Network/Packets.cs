@@ -127,6 +127,7 @@ namespace Shared.Network
         public const ushort CmdSellCar = 87;
         public const ushort CmdSelectCar = 89;
         public const ushort CmdUpgradeCarThread = 91;
+        public const ushort UpgradeCarAck = 92;
         public const ushort CmdStickerNameCheck = 93;
         public const ushort CmdDeleteStickerCatalog = 95;
         public const ushort CmdChannelList = 100;

@@ -206,6 +206,8 @@
     <Compile Include="Util\TdfReader.cs" />
     <Compile Include="Util\Version.cs" />
     <Compile Include="Util\Win32.cs" />
+    <Compile Include="Network\Packets\GameServer\Buy\UpgradeCarPacket.cs" />
+    <Compile Include="Network\Packets\GameServer\Buy\UpgradeCarAnswer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
