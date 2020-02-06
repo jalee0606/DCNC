@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using MySql.Data.MySqlClient;
 using Shared.Database;
 using Shared.Util;
@@ -28,6 +29,11 @@ namespace Shared.Objects
         public uint SlotType;
         
         public ulong CharacterId;
+
+        public int Speed;
+        public int Accel;
+        public int Crash;
+        public int Boost;
 
         public void Serialize(BinaryWriterExt writer)
         {
@@ -64,6 +70,21 @@ namespace Shared.Objects
             MitronEfficiency = (float) Convert.ToDouble(reader["mitronEfficiency"]);
             SBBOn = false;
             SlotType = Convert.ToUInt32(reader["slotType"]);
+            var vehicleData = ServerMain.Vehicles.SingleOrDefault(vehicle => vehicle.UniqueId == CarType.ToString());
+            if(Grade == 0)
+            {
+                Speed = Int32.Parse(vehicleData.Speed);
+                Accel = Int32.Parse(vehicleData.Acceleration);
+                Boost = Int32.Parse(vehicleData.Boost);
+                Crash = Int32.Parse(vehicleData.Crash);
+            }
+            else
+            {
+                Speed = Int32.Parse(vehicleData.Upgrades[(int)Grade-1].Acceleration);
+                Accel = Int32.Parse(vehicleData.Upgrades[(int)Grade - 1].Acceleration);
+                Boost = Int32.Parse(vehicleData.Upgrades[(int)Grade - 1].Boost);
+                Crash = Int32.Parse(vehicleData.Upgrades[(int)Grade - 1].Crash);
+            }
         }
 
         public void WriteToDb(ref InsertCommand cmd)

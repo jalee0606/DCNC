@@ -58,7 +58,9 @@ namespace GameServer.Network.Handlers.Join
             if (packet.Sender.User.Permission >= UserPermission.Administrator)
                 character.PartyType = 65;
 
-            packet.Sender.User.ActiveCharacter.ActiveCar = vehicles.Find(vehicle => vehicle.CarId == character.ActiveVehicleId);
+            var activeCar = vehicles.Find(vehicle => vehicle.CarId == character.ActiveVehicleId);
+
+            packet.Sender.User.ActiveCharacter.ActiveCar = activeCar;
             var ack = new LoadCharThreadAnswer()
             {
                 ServerId = 0,
@@ -73,14 +75,14 @@ namespace GameServer.Network.Handlers.Join
             {
                 StatisticInfo = new XiStrStatInfo()
                 {
-                    BasedAccel = 0,
-                    BasedBoost = 0,
-                    BasedCrash = 0,
-                    BasedSpeed = 0,
-                    CharAccel = 0,
-                    CharBoost = 0,
-                    CharCrash = 0,
-                    CharSpeed = 0,
+                    BasedAccel = activeCar.Accel,
+                    BasedBoost = activeCar.Boost,
+                    BasedCrash = activeCar.Crash,
+                    BasedSpeed = activeCar.Speed,
+                    CharAccel = character.Level,
+                    CharBoost = character.Level,
+                    CharCrash = character.Level,
+                    CharSpeed = character.Level,
                     EquipAccel = 0,
                     EquipBoost = 0,
                     EquipCrash = 0,

@@ -48,6 +48,10 @@ namespace Shared.Objects
             writer.Write(ItemUseCrash);
             writer.Write(ItemUseAccel);
             writer.Write(ItemUseBoost);
+            TotalSpeed = BasedSpeed + CharSpeed + EquipSpeed + ItemUseSpeed;
+            TotalAccel = BasedAccel + CharAccel + EquipAccel + ItemUseAccel;
+            TotalBoost = BasedBoost + CharBoost + EquipBoost + ItemUseBoost;
+            TotalCrash = BasedCrash + CharCrash + EquipCrash + ItemUseCrash;
             writer.Write(TotalSpeed);
             writer.Write(TotalCrash);
             writer.Write(TotalAccel);
